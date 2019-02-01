@@ -37,6 +37,8 @@ parser.add_argument('--data-dir', default='data',
                     help='location of data files')
 parser.add_argument('--output-dir', default='output',
                     help='location of output files')
+parser.add_argument('--epochs', default='10',
+                    help='number of epochs')
 args = parser.parse_args()
 args.cuda = not args.no_cuda and torch.cuda.is_available()
 
@@ -126,6 +128,7 @@ def test():
     with open(os.path.join(args.output_dir, 'metrics.json'), 'w') as f:
         f.write(json.dumps(metrics))
 
-epoch = int(os.environ['EPOCH'])
+#epoch = int(os.environ['EPOCH'])
+epoch = args.epochs
 train(epoch)
 test()
